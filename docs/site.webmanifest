@@ -1,0 +1,15 @@
+{
+  "name": "PredictWin LoL",
+  "short_name": "PredictWin",
+  "description": "Regressão logística que estima vitórias no League of Legends. Projeto de portfólio.",
+  "lang": "pt-BR",
+  "start_url": "/PredictWin-LOL-IA/",
+  "scope": "/PredictWin-LOL-IA/",
+  "display": "standalone",
+  "background_color": "#070a12",
+  "theme_color": "#070a12",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

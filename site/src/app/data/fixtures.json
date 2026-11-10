@@ -1,0 +1,362 @@
+[
+ {
+  "team1": [
+   "Nunu & Willump",
+   "Graves",
+   "Gangplank",
+   "Jhin",
+   "Thresh"
+  ],
+  "team2": [
+   "Renekton",
+   "Nidalee",
+   "Sylas",
+   "Miss Fortune",
+   "Swain"
+  ],
+  "minutes": 49.1,
+  "proba": 0.18261429697021384
+ },
+ {
+  "team1": [
+   "Jax",
+   "Olaf",
+   "Zoe",
+   "Ashe",
+   "Sett"
+  ],
+  "team2": [
+   "Camille",
+   "Graves",
+   "Kassadin",
+   "Jhin",
+   "Shaco"
+  ],
+  "minutes": 26.033333333333335,
+  "proba": 0.34854686924629935
+ },
+ {
+  "team1": [
+   "Camille",
+   "Kindred",
+   "Xerath",
+   "Kai'Sa",
+   "Alistar"
+  ],
+  "team2": [
+   "Sett",
+   "Nidalee",
+   "Renekton",
+   "Jhin",
+   "Pantheon"
+  ],
+  "minutes": 19.516666666666666,
+  "proba": 0.1357901440214846
+ },
+ {
+  "team1": [
+   "Rumble",
+   "Ivern",
+   "Lucian",
+   "Syndra",
+   "Sett"
+  ],
+  "team2": [
+   "Malphite",
+   "Graves",
+   "Sylas",
+   "Ashe",
+   "Leona"
+  ],
+  "minutes": 19.516666666666666,
+  "proba": 0.26640186161360296
+ },
+ {
+  "team1": [
+   "Renekton",
+   "Taliyah",
+   "Gragas",
+   "Kai'Sa",
+   "Maokai"
+  ],
+  "team2": [
+   "Camille",
+   "Karthus",
+   "Yone",
+   "Aphelios",
+   "Pantheon"
+  ],
+  "minutes": 15.466666666666667,
+  "proba": 0.44337190301806817
+ },
+ {
+  "team1": [
+   "Maokai",
+   "Lee Sin",
+   "Zoe",
+   "Yasuo",
+   "Blitzcrank"
+  ],
+  "team2": [
+   "Tryndamere",
+   "Kayn",
+   "Yone",
+   "Senna",
+   "Pantheon"
+  ],
+  "minutes": 31.25,
+  "proba": 0.3345836561425965
+ },
+ {
+  "team1": [
+   "Gragas",
+   "Lee Sin",
+   "LeBlanc",
+   "Aphelios",
+   "Rakan"
+  ],
+  "team2": [
+   "Renekton",
+   "Jarvan IV",
+   "Akali",
+   "Varus",
+   "Maokai"
+  ],
+  "minutes": 33.733333333333334,
+  "proba": 0.9116790130977074
+ },
+ {
+  "team1": [
+   "Gragas",
+   "Lillia",
+   "Lucian",
+   "Miss Fortune",
+   "Maokai"
+  ],
+  "team2": [
+   "Aatrox",
+   "Lee Sin",
+   "Orianna",
+   "Samira",
+   "Leona"
+  ],
+  "minutes": 32.56666666666667,
+  "proba": 0.512814252258923
+ },
+ {
+  "team1": [
+   "Sett",
+   "Riven",
+   "Anivia",
+   "Caitlyn",
+   "Lux"
+  ],
+  "team2": [
+   "Poppy",
+   "Taliyah",
+   "Kassadin",
+   "Jhin",
+   "Morgana"
+  ],
+  "minutes": 24.833333333333332,
+  "proba": 0.12857523423885434
+ },
+ {
+  "team1": [
+   "Renekton",
+   "Lillia",
+   "Jayce",
+   "Kai'Sa",
+   "Maokai"
+  ],
+  "team2": [
+   "Gragas",
+   "Elise",
+   "Yone",
+   "Jhin",
+   "Alistar"
+  ],
+  "minutes": 27.133333333333333,
+  "proba": 0.5008629225029378
+ },
+ {
+  "team1": [
+   "Malphite",
+   "Graves",
+   "Akali",
+   "Kai'Sa",
+   "Shen"
+  ],
+  "team2": [
+   "Sylas",
+   "Nidalee",
+   "Jayce",
+   "Jhin",
+   "Bard"
+  ],
+  "minutes": 32.1,
+  "proba": 0.32772087527914
+ },
+ {
+  "team1": [
+   "Camille",
+   "Taliyah",
+   "Yone",
+   "Kai'Sa",
+   "Alistar"
+  ],
+  "team2": [
+   "Shen",
+   "Hecarim",
+   "Jayce",
+   "Jhin",
+   "Gragas"
+  ],
+  "minutes": 15.466666666666667,
+  "proba": 0.2591685813932846
+ },
+ {
+  "team1": [
+   "Akali",
+   "Lee Sin",
+   "Orianna",
+   "Ezreal",
+   "Bard"
+  ],
+  "team2": [
+   "Jax",
+   "Shen",
+   "Sylas",
+   "Miss Fortune",
+   "Pantheon"
+  ],
+  "minutes": 26.116666666666667,
+  "proba": 0.6853054044487078
+ },
+ {
+  "team1": [
+   "Kennen",
+   "Lee Sin",
+   "Sett",
+   "Caitlyn",
+   "Pantheon"
+  ],
+  "team2": [
+   "Gangplank",
+   "Graves",
+   "Zoe",
+   "Kai'Sa",
+   "Maokai"
+  ],
+  "minutes": 33.733333333333334,
+  "proba": 0.6211512480149385
+ },
+ {
+  "team1": [
+   "Gangplank",
+   "Kha'Zix",
+   "Vladimir",
+   "Miss Fortune",
+   "Thresh"
+  ],
+  "team2": [
+   "Fiora",
+   "Taliyah",
+   "Irelia",
+   "Jhin",
+   "Swain"
+  ],
+  "minutes": 15.466666666666667,
+  "proba": 0.1798091264150799
+ },
+ {
+  "team1": [
+   "Lucian",
+   "Kayn",
+   "Orianna",
+   "Xayah",
+   "Rakan"
+  ],
+  "team2": [
+   "Kled",
+   "Olaf",
+   "Veigar",
+   "Samira",
+   "Morgana"
+  ],
+  "minutes": 23.516666666666666,
+  "proba": 0.07592762237422165
+ },
+ {
+  "team1": [
+   "Darius",
+   "Lee Sin",
+   "Nunu & Willump",
+   "Jhin",
+   "Rakan"
+  ],
+  "team2": [
+   "Gragas",
+   "Graves",
+   "Lucian",
+   "Viktor",
+   "Pyke"
+  ],
+  "minutes": 34.65,
+  "proba": 0.10523666953733346
+ },
+ {
+  "team1": [
+   "Irelia",
+   "Nunu & Willump",
+   "Jayce",
+   "Samira",
+   "Alistar"
+  ],
+  "team2": [
+   "Malphite",
+   "Graves",
+   "Akali",
+   "Kai'Sa",
+   "Galio"
+  ],
+  "minutes": 28.616666666666667,
+  "proba": 0.5124767538348661
+ },
+ {
+  "team1": [
+   "Malphite",
+   "Kindred",
+   "Anivia",
+   "Aphelios",
+   "Alistar"
+  ],
+  "team2": [
+   "Camille",
+   "Graves",
+   "Viktor",
+   "Jhin",
+   "Pantheon"
+  ],
+  "minutes": 14.066666666666666,
+  "proba": 0.3121956424921423
+ },
+ {
+  "team1": [
+   "Campeão Novo",
+   "Graves",
+   "Yone",
+   "Jhin",
+   "Leona"
+  ],
+  "team2": [
+   "Camille",
+   "Lillia",
+   "Akali",
+   "Kai'Sa",
+   "Campeão Novo"
+  ],
+  "minutes": 31.5,
+  "proba": 0.45848870617512355
+ }
+]

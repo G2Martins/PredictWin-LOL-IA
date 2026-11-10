@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>PredictWin LoL | Regressão logística que prevê vitórias no League of Legends</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Simulador interativo de um modelo de regressão logística treinado em 2.901 partidas reais de League of Legends (fim de 2020): monte os dois times, veja a probabilidade de vitória, as métricas honestas e as limitações. Projeto de portfólio de Gustavo Martins Gripaldi.">
+  <meta name="author" content="Gustavo Martins Gripaldi">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#070a12" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://g2martins.github.io/PredictWin-LOL-IA/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PredictWin LoL">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="PredictWin LoL | Regressão logística que prevê vitórias no League of Legends">
+  <meta property="og:description" content="Monte os dois times e veja a probabilidade de vitória calculada no navegador, com métricas honestas e limitações do modelo.">
+  <meta property="og:url" content="https://g2martins.github.io/PredictWin-LOL-IA/">
+  <meta property="og:image" content="https://g2martins.github.io/PredictWin-LOL-IA/og/predictwin.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PredictWin LoL: probabilidade de vitória por composição de times">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PredictWin LoL | Regressão logística que prevê vitórias no League of Legends">
+  <meta name="twitter:description" content="Monte os dois times e veja a probabilidade de vitória calculada no navegador, com métricas honestas e limitações do modelo.">
+  <meta name="twitter:image" content="https://g2martins.github.io/PredictWin-LOL-IA/og/predictwin.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <script id="ld-json" type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://g2martins.github.io/PredictWin-LOL-IA/#website",
+        "url": "https://g2martins.github.io/PredictWin-LOL-IA/",
+        "name": "PredictWin LoL",
+        "inLanguage": "pt-BR",
+        "description": "Demonstração interativa de um modelo de regressão logística que estima a chance de vitória em partidas de League of Legends. Projeto de portfólio.",
+        "creator": { "@id": "https://g2portfolio.grovicdata.com/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://g2portfolio.grovicdata.com/#person",
+        "name": "Gustavo Martins Gripaldi",
+        "url": "https://g2portfolio.grovicdata.com/",
+        "jobTitle": "Engenheiro de dados",
+        "sameAs": ["https://github.com/G2Martins"]
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "name": "PredictWin-LOL-IA",
+        "description": "Regressão logística (scikit-learn) com one-hot encoding dos campeões de cada posição e duração da partida, exportada para inferência em TypeScript no navegador.",
+        "codeRepository": "https://github.com/G2Martins/PredictWin-LOL-IA",
+        "programmingLanguage": ["Python", "TypeScript"],
+        "runtimePlatform": "scikit-learn, Angular",
+        "inLanguage": "pt-BR",
+        "author": { "@id": "https://g2portfolio.grovicdata.com/#person" }
+      },
+      {
+        "@type": "Dataset",
+        "name": "s11.csv: partidas de League of Legends do fim de 2020",
+        "description": "2.901 partidas ranqueadas de League of Legends registradas entre 25/10/2020 e 31/12/2020, com os cinco campeões de cada time por posição, servidor, data, duração e resultado (Victory/Defeat, que o código original interpreta como o do Time 1). Arquivo incluído no repositório original do projeto; a origem da coleta não é documentada.",
+        "url": "https://github.com/G2Martins/PredictWin-LOL-IA/blob/main/assets/s11.csv",
+        "temporalCoverage": "2020-10-25/2020-12-31",
+        "variableMeasured": ["resultado", "servidor", "campeões do Time 1 por posição", "campeões do Time 2 por posição", "duração da partida"],
+        "isAccessibleForFree": true,
+        "inLanguage": "en",
+        "encodingFormat": "text/csv"
+      }
+    ]
+  }
+  </script>
+  <!-- Reveal bootstrap before first paint. Content shows anyway if JS never boots. -->
+  <script>
+    (function () {
+      var c = document.documentElement.classList;
+      c.add('js');
+      setTimeout(function () { if (!c.contains('reveal-ready')) c.add('reveal-all'); }, 3000);
+    })();
+  </script>
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>

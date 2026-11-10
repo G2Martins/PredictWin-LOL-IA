@@ -1,0 +1,59 @@
+<!doctype html>
+<!-- Template for public/og/predictwin.png (1200x630). Rendered by scripts/og.py with Playwright. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: Geist; src: url(../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2) format("woff2"); font-weight: 100 900; }
+  @font-face { font-family: GeistMono; src: url(../node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2) format("woff2"); font-weight: 100 900; }
+  * { margin: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; overflow: hidden; color: #eef1f7; font-family: Geist, sans-serif; position: relative;
+    background: radial-gradient(760px 560px at -6% 20%, rgb(61 142 240 / .30), transparent 64%),
+                radial-gradient(760px 560px at 106% 60%, rgb(229 83 75 / .26), transparent 64%), #070a12; }
+  .dots { position: absolute; inset: 0; background-image: radial-gradient(circle, rgb(160 180 230 / .12) 1.2px, transparent 1.2px); background-size: 24px 24px; }
+  .wrap { position: absolute; inset: 0; padding: 60px 72px; display: flex; flex-direction: column; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 16px; font-size: 38px; font-weight: 600; letter-spacing: -0.04em; }
+  .brand span { font-weight: 300; color: #a9b3c7; }
+  .eyebrow { font-family: GeistMono, monospace; font-size: 17px; letter-spacing: .16em; text-transform: uppercase; color: #a9b3c7; display: flex; align-items: center; gap: 12px; }
+  .eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 9px; background: #e0b65a; }
+  h1 { font-size: 72px; font-weight: 300; letter-spacing: -0.05em; line-height: 1.02; margin-top: 20px; }
+  h1 b { font-weight: 400; color: #e0b65a; }
+  .card { position: absolute; right: 72px; top: 150px; width: 380px; padding: 28px; border-radius: 18px; background: #0d1320;
+          border: 1px solid #1c2538; box-shadow: 0 0 0 7px #090d17, 0 0 0 8px #2a3550, 0 30px 60px rgb(0 0 0 / .45); }
+  .lbl { font-family: GeistMono, monospace; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #a9b3c7; }
+  .nums { display: flex; justify-content: space-between; margin-top: 16px; font-size: 54px; font-weight: 300; letter-spacing: -0.04em; }
+  .split { display: flex; gap: 3px; height: 14px; margin-top: 14px; }
+  .split i { display: block; border-radius: 4px; }
+  .rows { margin-top: 22px; display: grid; gap: 9px; font-size: 15px; color: #a9b3c7; }
+  .rows div { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 10px; }
+  .rows b { display: block; height: 10px; border-radius: 0 4px 4px 0; }
+  .foot { font-family: GeistMono, monospace; font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: #8590a8; }
+</style>
+</head>
+<body>
+  <div class="dots"></div>
+  <div class="card">
+    <p class="lbl">Probabilidade estimada</p>
+    <div class="nums"><span>56%</span><span style="color:#a9b3c7">44%</span></div>
+    <div class="split"><i style="flex:56;background:#3d8ef0"></i><i style="flex:44;background:#e5534b"></i></div>
+    <div class="rows">
+      <!-- Real top-4 terms of the default "Mais escolhidos" composition (p = 56,0%). -->
+      <div>Meio · Yone T2<b style="width:100%;background:#3d8ef0"></b></div>
+      <div>Topo · Camille T2<b style="width:44%;background:#e5534b"></b></div>
+      <div>Suporte · Leona T1<b style="width:40%;background:#3d8ef0"></b></div>
+      <div>Selva · Graves T1<b style="width:38%;background:#3d8ef0"></b></div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="brand">
+      <svg width="54" height="54" viewBox="0 0 32 32"><defs><clipPath id="c"><rect x="1" y="1" width="30" height="30" rx="8.5"/></clipPath></defs><g clip-path="url(#c)"><rect width="32" height="32" fill="#e5534b"/><path d="M0 0h32L0 32z" fill="#3d8ef0"/></g><rect x="1" y="1" width="30" height="30" rx="8.5" fill="none" stroke="#e0b65a" stroke-width="2"/><path d="M11 23V9h6.2a4.4 4.4 0 0 1 0 8.8H11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>Predict<span>Win</span></div>
+    </div>
+    <div>
+      <p class="eyebrow">League of Legends · regressão logística</p>
+      <h1>Quem vence<br>a partida? <b>Um modelo<br>honesto.</b></h1>
+    </div>
+    <p class="foot">2.901 partidas reais · Projeto de portfólio de Gustavo Martins Gripaldi</p>
+  </div>
+</body>
+</html>

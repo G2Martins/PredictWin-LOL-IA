@@ -1,0 +1,15 @@
+﻿coluna,tipo,descricao,exemplo
+result,texto,Resultado da partida: Victory ou Defeat. O código original trata como o resultado do Time 1.,Defeat
+server,texto,"Rótulo de servidor no arquivo (www, euw, na, eune).",eune
+team_1__001,texto,Campeão do Time 1 na coluna 1 (rota inferida: Topo).,Irelia
+team_1__002,texto,Campeão do Time 1 na coluna 2 (rota inferida: Selva).,Elise
+team_1__003,texto,Campeão do Time 1 na coluna 3 (rota inferida: Meio).,Fizz
+team_1__004,texto,Campeão do Time 1 na coluna 4 (rota inferida: Atirador).,Draven
+team_1__005,texto,Campeão do Time 1 na coluna 5 (rota inferida: Suporte).,Morgana
+team_2__001,texto,Campeão do Time 2 na coluna 1 (rota inferida: Topo).,Kayle
+team_2__002,texto,Campeão do Time 2 na coluna 2 (rota inferida: Selva).,Rek'Sai
+team_2__003,texto,Campeão do Time 2 na coluna 3 (rota inferida: Meio).,Yasuo
+team_2__004,texto,Campeão do Time 2 na coluna 4 (rota inferida: Atirador).,Ezreal
+team_2__005,texto,Campeão do Time 2 na coluna 5 (rota inferida: Suporte).,Thresh
+timestamp,data e hora,Momento do registro da partida (fuso não documentado).,2020-11-07 05:46:02
+game_length,texto,"Duração no formato ""Xm Ys"". O modelo converte para minutos.",18m 0s

@@ -1,0 +1,825 @@
+<a href="#simulador" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-ink">Pular para o simulador</a>
+
+<!-- Portfolio disclaimer: always visible, first thing a visitor reads. -->
+<div class="border-b border-line bg-well text-[12px] leading-snug text-ink-2">
+  <p class="wrap py-2 text-center">
+    Projeto de portfólio de {{ links.author }}.
+    <a [href]="links.project" class="ml-1 whitespace-nowrap text-accent underline underline-offset-2">Ver no portfólio</a>
+  </p>
+</div>
+
+<header class="sticky top-0 z-40 border-b border-line bg-bg/95">
+  <div class="wrap flex h-14 items-center gap-6">
+    <a href="#visao-geral" class="flex items-center gap-2.5" aria-label="PredictWin, visão geral">
+      <img src="favicon.svg" width="26" height="26" alt="">
+      <span class="text-[17px] font-semibold tracking-[-0.04em]">Predict<span class="font-light text-ink-2">Win</span></span>
+    </a>
+    <nav class="ml-auto hidden items-center gap-6 md:flex" aria-label="Seções">
+      <a href="#visao-geral" class="navlink">Visão geral</a>
+      <a href="#dashboard" class="navlink">Dashboard</a>
+      <a href="#modelo" class="navlink">Modelo</a>
+      <a href="#simulador" class="navlink">Simulador</a>
+      <a href="#dados" class="navlink">Dados</a>
+    </nav>
+    <a [href]="links.repo" class="btn btn-line ml-auto !min-h-9 !px-3 text-[13px] md:ml-0">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
+      GitHub
+    </a>
+  </div>
+  <nav class="flex justify-between gap-3 overflow-x-auto border-t border-line px-4 py-2.5 text-[13px] md:hidden" aria-label="Seções (mobile)">
+    <a href="#visao-geral" class="navlink">Visão geral</a>
+    <a href="#dashboard" class="navlink">Dashboard</a>
+    <a href="#modelo" class="navlink">Modelo</a>
+    <a href="#simulador" class="navlink">Simulador</a>
+    <a href="#dados" class="navlink">Dados</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ============ VISÃO GERAL ============ -->
+  <section id="visao-geral" class="scroll-mt-28" aria-labelledby="h1">
+    <div class="wrap grid gap-12 pb-14 pt-14 lg:grid-cols-[1.25fr_1fr] lg:items-end lg:pt-20">
+      <div>
+        <p class="eyebrow">Regressão logística · League of Legends · {{ int(e.kpis.rows) }} partidas</p>
+        <h1 id="h1" class="h-display mt-5 text-[40px] sm:text-[56px] lg:text-[64px]">
+          <span class="mask"><span class="rise">Quem vence a partida?</span></span>
+          <span class="mask"><span class="rise text-ink-2" style="animation-delay: 90ms">Um modelo honesto sobre</span></span>
+          <span class="mask"><span class="rise text-accent" style="animation-delay: 180ms">composição de times.</span></span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-[16px] leading-relaxed text-ink-2">
+          Trabalho de IA da faculdade transformado em app de dados. O modelo lê os dez campeões e a duração da partida e
+          devolve a chance de vitória do Time 1. Dashboard do dataset, avaliação completa e simulador, com a conta rodando
+          no seu navegador a partir dos mesmos coeficientes que o scikit-learn aprendeu.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#simulador" class="btn btn-primary">Montar os times</a>
+          <a href="#dashboard" class="btn btn-line">Explorar os dados</a>
+        </div>
+      </div>
+
+      <figure class="card ticks p-6" aria-labelledby="hero-cap">
+        <p class="eyebrow">Área sob a curva ROC</p>
+        <figcaption id="hero-cap" class="mt-3 text-[15px] leading-snug">
+          Ótimo no treino, quase uma moeda no teste: o modelo decorou as partidas que viu.
+        </figcaption>
+        <ul class="mt-6 space-y-4">
+          @for (b of [
+            { label: 'Treino', v: m.metrics.train.rocAuc, c: 'var(--ink-2)' },
+            { label: 'Teste', v: m.metrics.test.rocAuc, c: 'var(--accent)' },
+            { label: 'Moeda (acaso)', v: 0.5, c: 'var(--line-2)' }
+          ]; track b.label) {
+            <li class="grid grid-cols-[96px_1fr_44px] items-center gap-3 text-[13px]">
+              <span class="text-ink-2">{{ b.label }}</span>
+              <span class="relative h-3.5 bg-well">
+                <span class="bar absolute inset-y-0 left-0 w-full" [style.background]="b.c" [style.transform]="'scaleX(' + b.v + ')'"></span>
+              </span>
+              <span class="num mono text-right">{{ dec(b.v) }}</span>
+            </li>
+          }
+        </ul>
+        <p class="mt-6 border-t border-line pt-4 text-[13px] leading-relaxed text-ink-2">
+          Acurácia de teste: <strong class="text-ink">{{ pct(m.metrics.test.accuracy) }}</strong>. Chutar "derrota" sempre
+          acertaria <strong class="text-ink">{{ pct(m.metrics.test.majorityBaseline) }}</strong>. O valor do projeto está em
+          entender por quê.
+        </p>
+      </figure>
+    </div>
+
+    <div class="wrap pb-16">
+      <div class="grid gap-5 md:grid-cols-3">
+        <article class="panel p-5">
+          <h2 class="text-[16px] font-medium">O problema</h2>
+          <p class="mt-2 text-[14px] leading-relaxed text-ink-2">
+            Em League of Legends, dois times de cinco jogadores escolhem campeões antes da partida. A pergunta do trabalho:
+            a composição (mais a duração) basta para estimar quem vence? Classificação binária: vitória ou derrota do Time 1.
+          </p>
+        </article>
+        <article class="panel p-5">
+          <h2 class="text-[16px] font-medium">A origem</h2>
+          <p class="mt-2 text-[14px] leading-relaxed text-ink-2">
+            Trabalho em grupo da disciplina de Inteligência Artificial da faculdade, com Regressão Logística Múltipla em
+            Python (pandas, scikit-learn, matplotlib). O código original está intacto no repositório.
+          </p>
+          <p class="mt-3 text-[13px] text-dim">Equipe: {{ credits.join(', ') }}.</p>
+        </article>
+        <article class="panel p-5">
+          <h2 class="text-[16px] font-medium">Por que virou app</h2>
+          <p class="mt-2 text-[14px] leading-relaxed text-ink-2">
+            Como peça de portfólio, o interessante não é a acurácia, é a avaliação: comparar com baseline, olhar treino
+            contra teste, calibração e explicar cada previsão. Tudo aqui sai do mesmo modelo, exportado do Python.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD ============ -->
+  <section id="dashboard" class="scroll-mt-28 border-t border-line py-16" aria-labelledby="dash-title">
+    @defer (hydrate on viewport) {
+    <div class="wrap">
+      <p class="eyebrow">Dashboard · análise exploratória</p>
+      <h2 id="dash-title" class="h2 mt-3 text-[32px] sm:text-[40px]">{{ int(e.kpis.rows) }} partidas reais do fim de 2020</h2>
+      <p class="mt-3 max-w-3xl text-ink-2">
+        O arquivo <a [href]="links.csv" class="text-accent underline underline-offset-2">assets/s11.csv</a> veio com o
+        repositório original: partidas ranqueadas entre {{ dateBr(e.kpis.from) }} e {{ dateBr(e.kpis.to) }}, na virada para
+        a Season 11. A fonte da coleta não foi documentada na época. Tudo abaixo foi calculado no Python, na exportação.
+      </p>
+
+      <dl class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+        @for (k of [
+          { l: 'Linhas', v: int(e.kpis.rows) },
+          { l: 'Colunas', v: int(e.kpis.columns) },
+          { l: 'Valores ausentes', v: int(e.kpis.missing) },
+          { l: 'Linhas duplicadas', v: int(e.kpis.duplicates) },
+          { l: 'Campeões distintos', v: int(e.kpis.champions) },
+          { l: 'Vitórias do Time 1', v: pct(winRate) },
+          { l: 'Duração mediana', v: int(e.kpis.minutes['50%']) + ' min' }
+        ]; track k.l) {
+          <div class="panel px-4 py-3"><dt class="text-[12px] text-ink-2">{{ k.l }}</dt><dd class="num mt-1 text-[24px] font-light tracking-[-0.02em]">{{ k.v }}</dd></div>
+        }
+      </dl>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+        <!-- Histogram of game length, stacked by result -->
+        <figure class="card p-5 sm:p-6" data-reveal>
+          <figcaption>
+            <span class="block text-[15px] font-medium">Duração das partidas por resultado</span>
+            <span class="block text-[13px] text-ink-2">Partidas por faixa de 2 minutos.</span>
+          </figcaption>
+          <div class="mt-3 flex gap-4 text-[12px] text-ink-2">
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-t1"></span>Vitória do Time 1</span>
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-sm bg-t2"></span>Vitória do Time 2</span>
+          </div>
+          <div class="mt-4 flex h-60 items-end gap-[2px] border-b border-line-2">
+            @for (h of hist.bins; track h.from) {
+              <div class="tip flex h-full flex-1 flex-col justify-end gap-[2px]" [attr.title]="h.from + ' a ' + h.to + ' min: ' + h.win + ' vitórias e ' + h.loss + ' derrotas do Time 1'">
+                <span class="block rounded-t-[4px] bg-t1" [style.height.%]="h.w * 100"></span>
+                <span class="block bg-t2" [style.height.%]="h.l * 100"></span>
+              </div>
+            }
+          </div>
+          <div class="mono mt-1 flex justify-between text-[10.5px] text-dim" aria-hidden="true"><span>8 min</span><span>20</span><span>30</span><span>40</span><span>50 min</span></div>
+          <p class="mt-3 text-[12px] text-dim">Maior faixa: {{ hist.max }} partidas. Passe o mouse para ver cada barra.</p>
+        </figure>
+
+        <!-- Class balance + win rate by duration -->
+        <div class="grid gap-6">
+          <figure class="card p-5 sm:p-6" data-reveal>
+            <figcaption class="text-[15px] font-medium">Desbalanceamento das classes</figcaption>
+            <div class="mt-4 flex h-4 gap-[2px]" role="img" [attr.aria-label]="'Vitórias do Time 1 ' + pct(winRate) + ', vitórias do Time 2 ' + pct(1 - winRate)">
+              <span class="h-full rounded-l-[4px] bg-t1" [style.flex-grow]="e.kpis.victories"></span>
+              <span class="h-full rounded-r-[4px] bg-t2" [style.flex-grow]="e.kpis.defeats"></span>
+            </div>
+            <div class="mt-2 flex justify-between text-[12px] text-ink-2">
+              <span>Time 1 venceu · {{ int(e.kpis.victories) }} ({{ pct(winRate) }})</span>
+              <span>{{ int(e.kpis.defeats) }} · Time 2 venceu</span>
+            </div>
+            <p class="mt-3 text-[13px] leading-relaxed text-ink-2">
+              Em ranqueada o esperado é perto de 50%. O rótulo deve vir de um recorte da coleta (o resultado de um jogador
+              acompanhado, por exemplo), não de um lado fixo do mapa. O arquivo não diz.
+            </p>
+          </figure>
+          <figure class="card p-5 sm:p-6" data-reveal>
+            <figcaption>
+              <span class="block text-[15px] font-medium">Taxa de vitória do Time 1 por duração</span>
+              <span class="block text-[13px] text-ink-2">A linha fina marca a média geral ({{ pct(winRate) }}).</span>
+            </figcaption>
+            <div class="relative mt-5 h-32 border-b border-line-2">
+              <div class="absolute inset-0 grid grid-cols-6 items-end gap-3">
+                @for (b of byLength.bins; track b.from) {
+                  <div class="tip flex h-full flex-col justify-end" [attr.title]="b.from + ' a ' + b.to + ' min: ' + pct(b.rate) + ' de vitórias em ' + b.n + ' partidas'">
+                    <span class="num mono mb-1 text-center text-[11px] text-ink-2">{{ pct(b.rate, 0) }}</span>
+                    <span class="mx-auto block w-full max-w-6 rounded-t-[4px] bg-accent" [style.height.%]="b.scale * 78"></span>
+                  </div>
+                }
+              </div>
+              <span class="pointer-events-none absolute inset-x-0 h-px bg-ink" [style.bottom.%]="byLength.base * 78" aria-hidden="true"></span>
+            </div>
+            <div class="mt-1 grid grid-cols-6 gap-3" aria-hidden="true">
+              @for (b of byLength.bins; track b.from) { <span class="mono text-center text-[10.5px] text-dim">{{ b.from }}-{{ b.to }}</span> }
+            </div>
+          </figure>
+        </div>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+        <figure class="card p-5 sm:p-6" data-reveal>
+          <figcaption>
+            <span class="block text-[15px] font-medium">Partidas por semana</span>
+            <span class="block text-[13px] text-ink-2">A coleta se concentra na última semana de dezembro.</span>
+          </figcaption>
+          <div class="mt-5 flex h-36 items-end gap-2 border-b border-line-2">
+            @for (w of weeks; track w.week) {
+              <div class="tip flex h-full flex-1 flex-col justify-end" [attr.title]="'Semana de ' + dateBr(w.week) + ': ' + w.n + ' partidas, ' + pct(w.rate) + ' de vitórias do Time 1'">
+                <span class="num mono mb-1 text-center text-[10.5px] text-ink-2">{{ w.n }}</span>
+                <span class="mx-auto block w-full max-w-6 rounded-t-[4px] bg-accent" [style.height.%]="w.scale * 80"></span>
+              </div>
+            }
+          </div>
+          <div class="mono mt-1 flex justify-between text-[10.5px] text-dim" aria-hidden="true"><span>{{ dateBr(weeks[0].week).slice(0, 5) }}</span><span>{{ dateBr(weeks[weeks.length - 1].week).slice(0, 5) }}</span></div>
+        </figure>
+        <figure class="card p-5 sm:p-6" data-reveal>
+          <figcaption>
+            <span class="block text-[15px] font-medium">Partidas por servidor</span>
+            <span class="block text-[13px] text-ink-2">Rótulos como estão no arquivo, com a taxa de vitória do Time 1.</span>
+          </figcaption>
+          <ul class="mt-5 space-y-3">
+            @for (s of servers; track s.server) {
+              <li class="tip grid grid-cols-[48px_1fr_auto] items-center gap-3 text-[13px]" [attr.title]="s.server + ': ' + s.n + ' partidas'">
+                <span class="mono">{{ s.server }}</span>
+                <span class="relative h-3.5"><span class="bar absolute inset-y-0 left-0 w-full bg-accent" [style.transform]="'scaleX(' + s.scale + ')'"></span></span>
+                <span class="num text-right text-ink-2"><span class="text-ink">{{ int(s.n) }}</span> · {{ pct(s.rate) }}</span>
+              </li>
+            }
+          </ul>
+        </figure>
+      </div>
+
+      <!-- Top picks per role (small multiples) -->
+      <figure class="card mt-6 p-5 sm:p-6" data-reveal>
+        <figcaption>
+          <span class="block text-[15px] font-medium">Campeões mais escolhidos pelo Time 1, por posição</span>
+          <span class="block text-[13px] text-ink-2">Barra = partidas. Percentual = taxa de vitória do Time 1 com aquele campeão (média geral {{ pct(winRate) }}).</span>
+        </figcaption>
+        <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          @for (r of picks; track r.role) {
+            <div>
+              <p class="mono text-[11px] uppercase tracking-[.12em] text-ink-2">{{ r.role }}</p>
+              <ul class="mt-2 space-y-1.5">
+                @for (c of r.champions; track c.champion) {
+                  <li class="tip text-[12.5px]" [attr.title]="c.champion + ' no ' + r.role + ' do Time 1: ' + c.n + ' partidas, ' + pct(c.rate) + ' de vitórias'">
+                    <span class="flex justify-between gap-2"><span class="truncate">{{ c.champion }}</span><span class="num text-ink-2">{{ c.n }} · {{ pct(c.rate, 0) }}</span></span>
+                    <span class="relative mt-0.5 block h-1.5"><span class="bar absolute inset-y-0 left-0 w-full !h-1.5 bg-accent" [style.transform]="'scaleX(' + c.scale + ')'"></span></span>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </figure>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <!-- Correlation heatmap -->
+        <figure class="card p-5 sm:p-6" data-reveal>
+          <figcaption>
+            <span class="block text-[15px] font-medium">Correlação entre variáveis numéricas</span>
+            <span class="block text-[13px] text-ink-2">Pearson. Popularidade = frequência média dos 5 campeões na sua coluna. Nada passa de 0,2: o resultado quase não se relaciona com nada aqui.</span>
+          </figcaption>
+          <div class="mt-5 overflow-x-auto">
+            <table class="num w-full min-w-[440px] border-separate border-spacing-[2px] text-[12px]">
+              <thead><tr><th class="w-28"></th>@for (l of e.corr.labels; track l) { <th class="px-1 pb-1 text-center align-bottom font-normal text-ink-2">{{ l }}</th> }</tr></thead>
+              <tbody>
+                @for (row of e.corr.matrix; track $index; let i = $index) {
+                  <tr>
+                    <th class="pr-2 text-left font-normal text-ink-2">{{ e.corr.labels[i] }}</th>
+                    @for (v of row; track $index; let j = $index) {
+                      <td class="tip h-10 rounded-[4px] text-center"
+                          [style.background]="i === j ? 'var(--well)' : 'color-mix(in oklab, ' + (v >= 0 ? 'var(--pos)' : 'var(--neg)') + ' ' + Math.round(Math.min(1, Math.abs(v) * 2.5) * 80) + '%, var(--mid))'"
+                          [attr.title]="e.corr.labels[i] + ' × ' + e.corr.labels[j] + ': ' + dec(v, 3)">{{ i === j ? '1' : dec(v) }}</td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <div class="mono mt-3 flex items-center gap-2 text-[11px] text-dim" aria-hidden="true">
+            <span>−0,4</span><span class="h-2 flex-1 rounded-sm" style="background: linear-gradient(90deg, var(--neg), var(--mid), var(--pos))"></span><span>+0,4</span>
+          </div>
+        </figure>
+
+        <!-- Permutation importance -->
+        <figure class="card p-5 sm:p-6" data-reveal>
+          <figcaption>
+            <span class="block text-[15px] font-medium">Importância por permutação</span>
+            <span class="block text-[13px] text-ink-2">
+              Queda na AUC de teste (base {{ dec(e.permutation.base) }}) ao embaralhar cada coluna original, média de
+              {{ e.permutation.repeats }} rodadas; a linha fina é ± 1 desvio. Tudo perto de zero.
+            </span>
+          </figcaption>
+          <ul class="mt-5 space-y-1.5">
+            @for (i of perm; track i.label) {
+              <li class="tip grid grid-cols-[132px_1fr_56px] items-center gap-2 text-[12.5px]" [attr.title]="i.label + ': ' + sgn(i.mean, 4) + ' ± ' + dec(i.std, 4)">
+                <span class="truncate text-ink-2">{{ i.label }}</span>
+                <span class="relative grid h-5 grid-cols-2">
+                  <span class="relative border-r border-line-2">
+                    @if (i.mean < 0) { <span class="bar bar-neg absolute inset-y-[3px] right-0 w-full bg-ink-2/60" [style.transform]="'scaleX(' + i.scale + ')'"></span> }
+                  </span>
+                  <span class="relative">
+                    @if (i.mean > 0) { <span class="bar absolute inset-y-[3px] left-0 w-full bg-accent" [style.transform]="'scaleX(' + i.scale + ')'"></span> }
+                  </span>
+                  <span class="absolute top-1/2 h-px bg-ink" [style.left]="'calc(50% + ' + ((i.mean >= 0 ? 1 : -1) * i.scale - i.err) * 50 + '%)'" [style.width.%]="i.err * 100"></span>
+                </span>
+                <span class="num mono text-right text-[11.5px]">{{ sgn(i.mean, 3) }}</span>
+              </li>
+            }
+          </ul>
+        </figure>
+      </div>
+
+      <!-- Top |coef| -->
+      <figure class="card mt-6 p-5 sm:p-6" data-reveal>
+        <figcaption>
+          <span class="block text-[15px] font-medium">Os 10 maiores coeficientes vêm de escolhas raras</span>
+          <span class="block text-[13px] text-ink-2">
+            Mesmo recorte do <code class="mono text-[12px]">feature.py</code> original (maior valor absoluto), com quantas
+            partidas sustentam cada peso. Peso alto com poucas partidas é decoreba, não estratégia.
+          </span>
+        </figcaption>
+        <div class="mono mt-4 grid grid-cols-[38%_1fr_52px] gap-3 text-[10.5px] text-dim sm:grid-cols-[28%_1fr_52px]" aria-hidden="true"><span></span><span class="flex justify-between"><span>← favorece Time 2</span><span>favorece Time 1 →</span></span><span></span></div>
+        <ul class="mt-2 space-y-1">
+          @for (c of topCoef; track c.champion + c.role + c.team) {
+            <li class="tip grid grid-cols-[38%_1fr_52px] items-center gap-3 rounded-md py-1 text-[13px] sm:grid-cols-[28%_1fr_52px]"
+                [attr.title]="c.champion + ' no ' + c.role + ' do Time ' + c.team + ': ' + sgn(c.v, 3) + ' em ' + c.games + ' partidas'">
+              <span class="min-w-0">
+                <span class="block truncate">{{ c.champion }}</span>
+                <span class="block truncate text-[11.5px] text-dim">{{ c.role }} · Time {{ c.team }} · {{ c.games }} partidas</span>
+              </span>
+              <span class="grid h-5 grid-cols-2">
+                <span class="relative border-r border-line-2">@if (c.v < 0) {<span class="bar bar-neg absolute inset-y-[3px] right-0 w-full bg-t2" [style.transform]="'scaleX(' + c.scale + ')'"></span>}</span>
+                <span class="relative">@if (c.v > 0) {<span class="bar absolute inset-y-[3px] left-0 w-full bg-t1" [style.transform]="'scaleX(' + c.scale + ')'"></span>}</span>
+              </span>
+              <span class="num mono text-right text-[12px]">{{ sgn(c.v) }}</span>
+            </li>
+          }
+        </ul>
+        <p class="mt-4 border-t border-line pt-4 text-[13px] leading-relaxed text-ink-2">
+          Positivo = mais chance de vitória do Time 1. Um campeão do Time 2 com peso positivo ajuda o Time 1 (o modelo viu o
+          adversário perder com ele). Intercepto: <span class="num mono text-ink">{{ sgn(m.intercept) }}</span>.
+        </p>
+      </figure>
+
+      <!-- Sortable / filterable table -->
+      <div class="card mt-6 p-5 sm:p-6" data-reveal>
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h3 class="text-[15px] font-medium">Amostra navegável</h3>
+            <p class="text-[13px] text-ink-2">As primeiras {{ e.table.rows.length }} linhas do CSV. Clique no cabeçalho para ordenar.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <label class="sr-only" for="busca">Buscar campeão</label>
+            <input id="busca" type="search" placeholder="Buscar campeão" class="field !w-44 !bg-none !pr-3" [value]="q()" (input)="filter(q, $any($event.target).value)">
+            <label class="sr-only" for="f-res">Resultado</label>
+            <select id="f-res" class="field !w-auto" (change)="filter(fResult, $any($event.target).value)">
+              <option value="">Resultado: todos</option><option value="Victory">Victory</option><option value="Defeat">Defeat</option>
+            </select>
+            <label class="sr-only" for="f-srv">Servidor</label>
+            <select id="f-srv" class="field !w-auto" (change)="filter(fServer, $any($event.target).value)">
+              <option value="">Servidor: todos</option>
+              @for (s of servers; track s.server) { <option [value]="s.server">{{ s.server }}</option> }
+            </select>
+          </div>
+        </div>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full min-w-[1100px] text-left text-[12px]">
+            <thead class="text-ink-2">
+              <tr class="border-b border-line">
+                @for (c of cols; track c; let i = $index) {
+                  <th class="py-1.5 pr-2 font-normal" [attr.aria-sort]="sortCol() === i ? (sortDir() === 1 ? 'ascending' : 'descending') : null">
+                    <button type="button" class="inline-flex items-center gap-1 hover:text-ink" (click)="sort(i)">
+                      {{ c }}<span class="mono text-[10px]" aria-hidden="true">{{ sortCol() === i ? (sortDir() === 1 ? '▲' : '▼') : '' }}</span>
+                    </button>
+                  </th>
+                }
+              </tr>
+            </thead>
+            <tbody>
+              @for (r of rows(); track r[0]) {
+                <tr class="border-b border-line/60">
+                  @for (v of r; track $index; let i = $index) {
+                    <td class="py-1.5 pr-2 whitespace-nowrap" [class.mono]="i < 3 || i === 13" [class.text-dim]="i === 0">{{ i === 2 ? dateBr($any(v)) : i === 13 ? int($any(v)) : v }}</td>
+                  }
+                </tr>
+              } @empty {
+                <tr><td [attr.colspan]="cols.length" class="py-6 text-center text-ink-2">Nenhuma linha com esses filtros.</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-3 flex items-center justify-between gap-3 text-[13px] text-ink-2">
+          <span class="num">{{ total() }} linhas · página {{ Math.min(page(), pages() - 1) + 1 }} de {{ pages() }}</span>
+          <span class="flex gap-2">
+            <button type="button" class="btn btn-line !min-h-9" [disabled]="page() === 0" (click)="page.set(page() - 1)">Anterior</button>
+            <button type="button" class="btn btn-line !min-h-9" [disabled]="page() >= pages() - 1" (click)="page.set(page() + 1)">Próxima</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    }
+  </section>
+
+  <!-- ============ MODELO ============ -->
+  <section id="modelo" class="scroll-mt-28 border-t border-line py-16" aria-labelledby="mod-title">
+    @defer (hydrate on viewport) {
+    <div class="wrap">
+      <p class="eyebrow">Modelo · avaliação</p>
+      <h2 id="mod-title" class="h2 mt-3 text-[32px] sm:text-[40px]">Treino 70%, teste 30%: o teste é que conta</h2>
+      <p class="mt-3 max-w-3xl text-ink-2">
+        Split com <code class="mono text-[13px]">random_state=42</code>: {{ int(m.metrics.train.n) }} partidas de treino e
+        {{ int(m.metrics.test.n) }} de teste. O original usa <code class="mono text-[13px]">class_weight='balanced'</code>,
+        que dá mais peso às vitórias raras: troca acurácia por recall da classe vitória.
+      </p>
+
+      <div class="card mt-8 overflow-x-auto p-5 sm:p-6">
+        <table class="num w-full min-w-[560px] text-left text-[14px]">
+          <thead class="text-[12px] text-ink-2">
+            <tr class="border-b border-line"><th class="py-2 font-normal">Métrica</th><th class="font-normal">Treino</th><th class="font-normal">Teste</th><th class="font-normal">Leitura</th></tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-line/60"><td class="py-2.5">Acurácia</td><td>{{ pct(m.metrics.train.accuracy) }}</td><td class="text-accent">{{ pct(m.metrics.test.accuracy) }}</td><td class="text-[13px] text-ink-2">Abaixo do baseline</td></tr>
+            <tr class="border-b border-line/60"><td class="py-2.5">Baseline (sempre "derrota")</td><td>{{ pct(m.metrics.train.majorityBaseline) }}</td><td>{{ pct(m.metrics.test.majorityBaseline) }}</td><td class="text-[13px] text-ink-2">A régua mínima</td></tr>
+            <tr class="border-b border-line/60"><td class="py-2.5">Acurácia balanceada</td><td>{{ pct(m.metrics.train.balancedAccuracy) }}</td><td class="text-accent">{{ pct(m.metrics.test.balancedAccuracy) }}</td><td class="text-[13px] text-ink-2">50% = acaso</td></tr>
+            <tr><td class="py-2.5">AUC ROC</td><td>{{ dec(m.metrics.train.rocAuc) }}</td><td class="text-accent">{{ dec(m.metrics.test.rocAuc) }}</td><td class="text-[13px] text-ink-2">0,50 = acaso</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+        <!-- ROC -->
+        <figure class="card p-5 sm:p-6" data-reveal>
+          <figcaption>
+            <span class="block text-[15px] font-medium">Curva ROC</span>
+            <span class="block text-[13px] text-ink-2">Taxa de verdadeiros positivos contra falsos positivos, varrendo o limiar.</span>
+          </figcaption>
+          <div class="mt-3 flex flex-wrap gap-4 text-[12px] text-ink-2">
+            <span class="flex items-center gap-1.5"><span class="h-0.5 w-4 bg-accent"></span>Teste · AUC {{ dec(m.metrics.test.rocAuc) }}</span>
+            <span class="flex items-center gap-1.5"><span class="h-0.5 w-4 bg-ink-2"></span>Treino · AUC {{ dec(m.metrics.train.rocAuc) }}</span>
+            <span class="flex items-center gap-1.5"><span class="h-px w-4 bg-line-2"></span>Acaso</span>
+          </div>
+          <div class="mt-4 grid grid-cols-[28px_1fr] gap-2">
+            <span class="mono flex flex-col justify-between pb-5 text-right text-[10.5px] text-dim" aria-hidden="true"><span>1</span><span>0,5</span><span>0</span></span>
+            <div>
+              <svg viewBox="-4 -4 308 308" class="aspect-square w-full max-w-[360px]" role="img" aria-label="Curva ROC de treino e teste">
+                @for (g of [0.25, 0.5, 0.75]; track g) {
+                  <line [attr.x1]="0" [attr.x2]="300" [attr.y1]="300 - sq(g)" [attr.y2]="300 - sq(g)" stroke="var(--line)" stroke-width="1" />
+                  <line [attr.y1]="0" [attr.y2]="300" [attr.x1]="sq(g)" [attr.x2]="sq(g)" stroke="var(--line)" stroke-width="1" />
+                }
+                <rect x="0" y="0" width="300" height="300" fill="none" stroke="var(--line-2)" stroke-width="1" />
+                <line x1="0" y1="300" x2="300" y2="0" stroke="var(--line-2)" stroke-width="1" />
+                <path [attr.d]="rocPath(m.viz.roc.train)" fill="none" stroke="var(--ink-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><title>Treino: AUC {{ dec(m.metrics.train.rocAuc) }}</title></path>
+                <path [attr.d]="rocPath(m.viz.roc.test)" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><title>Teste: AUC {{ dec(m.metrics.test.rocAuc) }}</title></path>
+              </svg>
+              <div class="mono flex max-w-[360px] justify-between text-[10.5px] text-dim" aria-hidden="true"><span>0</span><span>falsos positivos</span><span>1</span></div>
+            </div>
+          </div>
+        </figure>
+
+        <!-- Calibration -->
+        <figure class="card p-5 sm:p-6" data-reveal>
+          <figcaption>
+            <span class="block text-[15px] font-medium">Calibração no teste</span>
+            <span class="block text-[13px] text-ink-2">Probabilidade prevista (10 faixas) contra a taxa real de vitória. A diagonal seria um modelo calibrado.</span>
+          </figcaption>
+          <div class="mt-3 flex flex-wrap gap-4 text-[12px] text-ink-2">
+            <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-accent"></span>Faixa de previsão</span>
+            <span class="flex items-center gap-1.5"><span class="h-px w-4 bg-line-2"></span>Calibração perfeita</span>
+            <span class="flex items-center gap-1.5"><span class="h-px w-4 bg-t2"></span>Taxa real geral ({{ pct(1 - m.metrics.test.majorityBaseline) }})</span>
+          </div>
+          <div class="mt-4 grid grid-cols-[28px_1fr] gap-2">
+            <span class="mono flex flex-col justify-between pb-5 text-right text-[10.5px] text-dim" aria-hidden="true"><span>1</span><span>0,5</span><span>0</span></span>
+            <div>
+              <svg viewBox="-6 -6 312 312" class="aspect-square w-full max-w-[360px]" role="img" aria-label="Curva de calibração: as faixas ficam perto de 20% de vitórias qualquer que seja a probabilidade prevista">
+                @for (g of [0.25, 0.5, 0.75]; track g) {
+                  <line [attr.x1]="0" [attr.x2]="300" [attr.y1]="300 - sq(g)" [attr.y2]="300 - sq(g)" stroke="var(--line)" stroke-width="1" />
+                  <line [attr.y1]="0" [attr.y2]="300" [attr.x1]="sq(g)" [attr.x2]="sq(g)" stroke="var(--line)" stroke-width="1" />
+                }
+                <rect x="0" y="0" width="300" height="300" fill="none" stroke="var(--line-2)" stroke-width="1" />
+                <line x1="0" y1="300" x2="300" y2="0" stroke="var(--line-2)" stroke-width="1" />
+                <line x1="0" x2="300" [attr.y1]="300 - sq(1 - m.metrics.test.majorityBaseline)" [attr.y2]="300 - sq(1 - m.metrics.test.majorityBaseline)" stroke="var(--t2)" stroke-width="1" />
+                <path [attr.d]="calibPath" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" />
+                @for (c of m.viz.calibration; track $index) {
+                  <circle [attr.cx]="sq(c.pred)" [attr.cy]="300 - sq(c.obs)" r="5" fill="var(--accent)" stroke="var(--panel)" stroke-width="2"><title>Previsto {{ pct(c.pred) }}, real {{ pct(c.obs) }} em {{ c.n }} partidas</title></circle>
+                }
+              </svg>
+              <div class="mono flex max-w-[360px] justify-between text-[10.5px] text-dim" aria-hidden="true"><span>0</span><span>probabilidade prevista</span><span>1</span></div>
+            </div>
+          </div>
+        </figure>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-[1fr_1.3fr]">
+        <div class="card p-5 sm:p-6" data-reveal>
+          <p class="text-[15px] font-medium">Por classe, no teste</p>
+          <table class="num mt-4 w-full text-left text-[14px]">
+            <thead class="text-[12px] text-ink-2"><tr class="border-b border-line"><th class="py-2 font-normal">Classe</th><th class="font-normal">Precisão</th><th class="font-normal">Recall</th><th class="font-normal">F1</th><th class="font-normal">n</th></tr></thead>
+            <tbody>
+              @for (c of perClass; track c.label) {
+                <tr class="border-b border-line/60 last:border-0"><td class="py-2.5">{{ c.label }}</td><td>{{ pct(c.precision) }}</td><td>{{ pct(c.recall) }}</td><td>{{ dec(c['f1-score']) }}</td><td>{{ c.support }}</td></tr>
+              }
+            </tbody>
+          </table>
+          <p class="mt-4 text-[13px] leading-relaxed text-ink-2">
+            Quando o modelo diz "vitória", acerta {{ pct(perClass[1].precision, 0) }} das vezes, quase os mesmos
+            {{ pct(1 - m.metrics.test.majorityBaseline, 0) }} de vitórias que existem no teste.
+          </p>
+        </div>
+
+        <div class="card p-5 sm:p-6" data-reveal>
+          <p class="text-[15px] font-medium">Matriz de confusão</p>
+          <p class="mt-1 text-[13px] text-ink-2">Linhas: resultado real do Time 1. Colunas: previsão. Cor = fração da linha.</p>
+          <div class="mt-5 grid gap-6 sm:grid-cols-2">
+            @for (mx of matrices; track mx.key) {
+              <figure>
+                <figcaption class="mono text-[12px] text-ink-2">{{ mx.title }} · {{ int(mx.n) }} partidas</figcaption>
+                <div class="mt-2 grid grid-cols-[64px_1fr_1fr] gap-[2px] text-[12px]">
+                  <span></span><span class="pb-1 text-center text-dim">prev. Derrota</span><span class="pb-1 text-center text-dim">prev. Vitória</span>
+                  @for (r of mx.rows; track r.label) {
+                    <span class="flex items-center text-dim">{{ r.label }}</span>
+                    @for (c of r.cells; track $index) {
+                      <span class="tip num flex h-16 flex-col items-center justify-center rounded-[4px]"
+                            [style.background]="'color-mix(in oklab, var(--accent) ' + Math.round(c.share * 72) + '%, var(--well))'"
+                            [style.color]="c.share > 0.55 ? 'var(--accent-ink)' : null"
+                            [attr.title]="'Real ' + r.label + ', previsto ' + c.pred + ': ' + c.v + ' (' + pct(c.share) + ' da linha)'">
+                        <span class="text-[17px] font-medium">{{ int(c.v) }}</span>
+                        <span class="text-[11px] opacity-80">{{ pct(c.share, 0) }}</span>
+                      </span>
+                    }
+                  }
+                </div>
+              </figure>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision plane -->
+      <figure class="card mt-6 p-5 sm:p-6" data-reveal>
+        <figcaption>
+          <span class="block text-[15px] font-medium">Fronteira de decisão no plano exato do modelo</span>
+          <span class="block max-w-3xl text-[13px] leading-relaxed text-ink-2">
+            Como o modelo é linear, a previsão depende só de duas coisas: a soma dos pesos dos dez campeões (eixo x) e os
+            minutos (eixo y). O fundo é a probabilidade calculada numa grade; a linha marca 50%. Os pontos são 200 partidas
+            do teste com o resultado real. Se o modelo separasse bem, os pontos dourados ficariam à direita da linha.
+          </span>
+        </figcaption>
+        <div class="mt-3 flex flex-wrap gap-4 text-[12px] text-ink-2">
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-4 rounded-sm" style="background: color-mix(in oklab, var(--t1) 42%, var(--panel))"></span>Previsão Time 1</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-4 rounded-sm" style="background: color-mix(in oklab, var(--t2) 42%, var(--panel))"></span>Previsão Time 2</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full bg-accent"></span>Real: Time 1 venceu</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 rounded-full border-2 border-ink-2"></span>Real: Time 2 venceu</span>
+          <span class="flex items-center gap-1.5"><span class="h-3 w-3 rotate-45 border-2 border-ink bg-panel"></span>Sua composição (simulador)</span>
+        </div>
+        <div class="mt-4 grid grid-cols-[32px_1fr] gap-2">
+          <span class="mono flex flex-col justify-between pb-5 text-right text-[10.5px] text-dim" aria-hidden="true">
+            @for (t of plane.yTicks.slice().reverse(); track t.v) { <span>{{ t.v }}</span> }
+          </span>
+          <div class="min-w-0">
+            <svg [attr.viewBox]="'0 0 ' + plane.w + ' ' + plane.h" class="h-auto w-full" role="img" aria-label="Plano soma dos pesos por minutos com a probabilidade do modelo e partidas reais do teste">
+              <g fill="var(--t1)" shape-rendering="crispEdges">
+                @for (c of plane.cells1; track $index) { <rect [attr.x]="c.x" [attr.y]="c.y" [attr.width]="c.w" [attr.height]="c.h" [attr.fill-opacity]="c.o" /> }
+              </g>
+              <g fill="var(--t2)" shape-rendering="crispEdges">
+                @for (c of plane.cells2; track $index) { <rect [attr.x]="c.x" [attr.y]="c.y" [attr.width]="c.w" [attr.height]="c.h" [attr.fill-opacity]="c.o" /> }
+              </g>
+              @for (t of plane.xTicks; track t.v) { <line [attr.x1]="t.x" [attr.x2]="t.x" y1="0" [attr.y2]="plane.h" stroke="var(--line)" stroke-width="1" opacity="0.6" /> }
+              <line [attr.x1]="plane.line[0].x" [attr.y1]="plane.line[0].y" [attr.x2]="plane.line[1].x" [attr.y2]="plane.line[1].y" stroke="var(--ink)" stroke-width="2" />
+              <g fill="none" stroke="var(--ink-2)" stroke-width="1.5" opacity="0.75">
+                @for (pt of plane.losses; track $index) { <circle [attr.cx]="pt.x" [attr.cy]="pt.y" r="3.5"><title>Time 2 venceu · S {{ sgn(pt.s) }} · {{ int(pt.mi) }} min</title></circle> }
+              </g>
+              <g fill="var(--accent)" stroke="var(--panel)" stroke-width="1.5">
+                @for (pt of plane.wins; track $index) { <circle [attr.cx]="pt.x" [attr.cy]="pt.y" r="4"><title>Time 1 venceu · S {{ sgn(pt.s) }} · {{ int(pt.mi) }} min</title></circle> }
+              </g>
+              <rect [attr.x]="here().x - 7" [attr.y]="here().y - 7" width="14" height="14" [attr.transform]="'rotate(45 ' + here().x + ' ' + here().y + ')'" fill="var(--panel)" stroke="var(--ink)" stroke-width="2.5"><title>Sua composição: S {{ sgn(here().s) }}, {{ int(minutes()) }} min, p {{ pct(p()) }}</title></rect>
+            </svg>
+            <div class="relative mt-1 h-4" aria-hidden="true">
+              @for (t of plane.xTicks; track t.v) { <span class="mono absolute -translate-x-1/2 text-[10.5px] text-dim" [style.left.%]="t.x / plane.w * 100">{{ sgn(t.v, 0) }}</span> }
+            </div>
+            <p class="mono mt-1 text-center text-[10.5px] text-dim">soma dos pesos dos campeões (S) · eixo y em minutos</p>
+          </div>
+        </div>
+        <p class="mt-3 text-[13px] text-ink-2">
+          A linha é quase vertical: a duração mal pesa. Os dois tipos de ponto se misturam dos dois lados, que é o retrato da AUC de {{ dec(m.metrics.test.rocAuc) }}.
+          @if (here().clamped) { Sua composição está fora da faixa desenhada (S = {{ sgn(here().s) }}) e aparece na borda. }
+        </p>
+      </figure>
+
+      <!-- Como funciona -->
+      <div class="mt-14" data-reveal>
+        <h3 class="h2 text-[26px]">Como funciona: do CSV ao navegador, sem servidor</h3>
+        <ol class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <li class="panel p-5">
+            <p class="mono text-[12px] text-accent">01 · Python</p>
+            <h4 class="mt-2 text-[16px] font-medium">Pré-processamento</h4>
+            <p class="mt-2 text-[14px] leading-relaxed text-ink-2">Duração vira minutos ("30m 44s" → 30,73). Os 10 campeões viram one-hot coluna a coluna com <code class="mono text-[12px]">OneHotEncoder(handle_unknown='ignore')</code>: {{ m.params.nFeatures - 1 }} variáveis 0/1, mais a duração.</p>
+          </li>
+          <li class="panel p-5">
+            <p class="mono text-[12px] text-accent">02 · scikit-learn {{ m.params.sklearn }}</p>
+            <h4 class="mt-2 text-[16px] font-medium">Treino</h4>
+            <p class="mt-2 text-[14px] leading-relaxed text-ink-2"><code class="mono text-[12px]">LogisticRegression</code> (lbfgs, C=1, class_weight balanced, max_iter 5000), convergiu em {{ m.params.nIter }} iterações. Duração entra sem padronização: {{ sgn(m.minutesCoef, 4) }} por minuto.</p>
+          </li>
+          <li class="panel p-5">
+            <p class="mono text-[12px] text-accent">03 · export_model.py</p>
+            <h4 class="mt-2 text-[16px] font-medium">Exportação</h4>
+            <p class="mt-2 text-[14px] leading-relaxed text-ink-2">Treina igual ao <code class="mono text-[12px]">main.py</code> e grava coeficientes, métricas, curvas, a análise exploratória e 20 partidas com o <code class="mono text-[12px]">predict_proba</code> do sklearn.</p>
+          </li>
+          <li class="panel p-5">
+            <p class="mono text-[12px] text-accent">04 · TypeScript</p>
+            <h4 class="mt-2 text-[16px] font-medium">Inferência no navegador</h4>
+            <p class="mt-2 text-[14px] leading-relaxed text-ink-2">Soma intercepto, pesos dos campeões e coeficiente × minutos, aplica a sigmoide. O build falha se alguma das 20 probabilidades diferir do sklearn em mais de 0,000001.</p>
+          </li>
+        </ol>
+        <p class="mt-4 text-[13px] text-dim">Rotas: os nomes das colunas não dizem a posição; pela frequência (Camille e Aatrox na coluna 1, Graves e Taliyah na 2, Akali e Yone na 3, Jhin e Kai'Sa na 4, Leona e Alistar na 5) lemos Topo, Selva, Meio, Atirador e Suporte.</p>
+      </div>
+
+      <!-- Limitações -->
+      <div id="limitacoes" class="mt-14 scroll-mt-28" data-reveal>
+        <h3 class="h2 text-[26px]">Limitações: o que este modelo não é</h3>
+        <ul class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <li class="panel p-5 text-[14px] leading-relaxed text-ink-2"><strong class="block text-[15px] font-medium text-ink">Não generaliza</strong>AUC {{ dec(m.metrics.train.rocAuc) }} no treino e {{ dec(m.metrics.test.rocAuc) }} no teste: {{ m.params.nFeatures }} variáveis para {{ int(m.metrics.train.n) }} partidas é pouco dado para tanto parâmetro.</li>
+          <li class="panel p-5 text-[14px] leading-relaxed text-ink-2"><strong class="block text-[15px] font-medium text-ink">Não é pré-jogo</strong>A duração só é conhecida quando a partida termina. Um preditor de verdade usaria apenas o que existe na seleção de campeões.</li>
+          <li class="panel p-5 text-[14px] leading-relaxed text-ink-2"><strong class="block text-[15px] font-medium text-ink">Probabilidade inflada</strong>Com class_weight balanced o modelo trata as classes como 50/50, mas o dataset tem {{ pct(winRate) }} de vitórias. A curva de calibração mostra: os percentuais não são confiáveis.</li>
+          <li class="panel p-5 text-[14px] leading-relaxed text-ink-2"><strong class="block text-[15px] font-medium text-ink">Sem sinergia nem contra-escolha</strong>Cada campeão soma um peso independente. Duplas, rotas e confrontos diretos não existem para uma regressão linear sobre one-hot.</li>
+          <li class="panel p-5 text-[14px] leading-relaxed text-ink-2"><strong class="block text-[15px] font-medium text-ink">Rótulo e origem incertos</strong>O arquivo não diz de qual time é o resultado nem de onde veio. Há {{ e.kpis.duplicates }} linhas duplicadas que podem cair em treino e teste ao mesmo tempo.</li>
+          <li class="panel p-5 text-[14px] leading-relaxed text-ink-2"><strong class="block text-[15px] font-medium text-ink">Retrato de um patch</strong>Partidas de 2020. Campeões, itens e meta mudaram desde então; os pesos valem só para aquele recorte.</li>
+        </ul>
+      </div>
+    </div>
+    }
+  </section>
+
+  <!-- ============ SIMULADOR ============ -->
+  <section id="simulador" class="scroll-mt-28 border-y border-line bg-well/60 py-16" aria-labelledby="sim-title">
+    <div class="wrap">
+      <p class="eyebrow">Simulador</p>
+      <h2 id="sim-title" class="h2 mt-3 text-[32px] sm:text-[40px]">Monte os dois times</h2>
+      <p class="mt-3 max-w-3xl text-ink-2">
+        Escolha um campeão por posição e a duração. Cada coluna do dataset vira um conjunto próprio de variáveis, então o
+        mesmo campeão pesa diferente no topo e no meio. A lista de cada posição traz só quem aparece nela; o exemplo do
+        código original usa campeões fora da posição, e o modelo os ignora (peso zero), como o
+        <code class="mono text-[13px]">handle_unknown='ignore'</code> do original.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-2" role="group" aria-label="Exemplos prontos">
+        <button type="button" class="btn btn-line" [attr.aria-pressed]="preset() === 'comum'" (click)="load('comum')">Mais escolhidos</button>
+        <button type="button" class="btn btn-line" [attr.aria-pressed]="preset() === 'readme'" (click)="load('readme')">Exemplo do código original</button>
+        <button type="button" class="btn btn-line" [attr.aria-pressed]="preset() === 'teste'" (click)="load('teste')">Partida real do teste</button>
+        <button type="button" class="btn btn-line" [attr.aria-pressed]="preset() === 'sortear'" (click)="load('sortear')">Sortear</button>
+      </div>
+
+      <div class="mt-8 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-start">
+        <div class="card p-5 sm:p-6">
+          <div class="grid gap-6 sm:grid-cols-2">
+            @for (team of [1, 2]; track team) {
+              <fieldset>
+                <legend class="flex items-center gap-2 text-[15px] font-medium">
+                  <span class="h-2.5 w-2.5 rounded-full" [class.bg-t1]="team === 1" [class.bg-t2]="team === 2" aria-hidden="true"></span>
+                  Time {{ team }} <span class="text-[13px] font-normal text-dim">{{ team === 1 ? 'lado azul' : 'lado vermelho' }}</span>
+                </legend>
+                <div class="mt-3 space-y-3">
+                  @for (role of roles; track role; let i = $index) {
+                    @let slot = (team - 1) * 5 + i;
+                    @let value = team === 1 ? team1()[i] : team2()[i];
+                    <div class="grid grid-cols-[76px_1fr] items-center gap-2">
+                      <label [for]="'s' + slot" class="text-[13px] text-ink-2">{{ role }}</label>
+                      <select [id]="'s' + slot" class="field" (change)="pick(team === 1 ? 1 : 2, i, $any($event.target).value)">
+                        @if (!known(slot, value)) {
+                          <optgroup label="Sem partidas nesta posição (peso zero)"><option [value]="value" selected>{{ value }}</option></optgroup>
+                        }
+                        <optgroup label="Aparecem nesta posição">
+                          @for (c of options[slot]; track c) { <option [value]="c" [selected]="c === value" [attr.selected]="c === value ? '' : null">{{ c }}</option> }
+                        </optgroup>
+                      </select>
+                    </div>
+                  }
+                </div>
+              </fieldset>
+            }
+          </div>
+
+          <div class="mt-7 border-t border-line pt-5">
+            <div class="flex items-baseline justify-between gap-3">
+              <label for="minutos" class="text-[14px] font-medium">Duração da partida</label>
+              <output for="minutos" class="num mono text-[15px] text-accent">{{ int(minutes()) }} min</output>
+            </div>
+            <input id="minutos" type="range" class="range mt-2" min="8" max="50" step="0.1" [value]="minutes()" (input)="setMinutes($any($event.target).value)">
+            <div class="mono flex justify-between text-[11px] text-dim"><span>8 min</span><span>mediana {{ int(e.kpis.minutes['50%']) }}</span><span>50 min</span></div>
+            <p class="mt-3 text-[13px] text-dim">A duração só existe quando o jogo acaba. Ela está no modelo porque estava no trabalho original; o peso é pequeno.</p>
+          </div>
+        </div>
+
+        <!-- Resultado -->
+        <div class="card p-5 sm:p-6 lg:sticky lg:top-20" aria-labelledby="res-title">
+          <p id="res-title" class="eyebrow">Probabilidade estimada</p>
+          <div class="mt-4 grid grid-cols-2 gap-4" aria-live="polite" aria-atomic="true">
+            <div>
+              <p class="flex items-center gap-2 text-[13px] text-ink-2"><span class="h-2.5 w-2.5 rounded-full bg-t1" aria-hidden="true"></span>Time 1 vence</p>
+              <p class="num mt-1 text-[44px] font-light leading-none tracking-[-0.04em]" data-testid="p1">{{ pct(p()) }}</p>
+            </div>
+            <div class="text-right">
+              <p class="flex items-center justify-end gap-2 text-[13px] text-ink-2">Time 2 vence<span class="h-2.5 w-2.5 rounded-full bg-t2" aria-hidden="true"></span></p>
+              <p class="num mt-1 text-[44px] font-light leading-none tracking-[-0.04em]" data-testid="p2">{{ pct(1 - p()) }}</p>
+            </div>
+          </div>
+          <div class="relative mt-5 h-3 overflow-hidden rounded-[4px] bg-well" aria-hidden="true">
+            <span class="bar-anim absolute inset-y-0 left-0 w-full origin-left bg-t1" [style.transform]="'scaleX(' + p() + ')'"></span>
+            <span class="bar-anim absolute inset-y-0 right-0 w-full origin-right bg-t2" [style.transform]="'scaleX(' + (1 - p()) + ')'"></span>
+          </div>
+          <p class="mt-4 text-[15px]">
+            Previsão do modelo: <strong>{{ p() > 0.5 ? 'Time 1 vence' : 'Time 2 vence' }}</strong>
+            @if (preset() === 'teste') {
+              <span class="block text-[13px] text-ink-2">Resultado real dessa partida: {{ m.testMatch.result === 'Victory' ? 'vitória' : 'derrota' }} do Time 1.</span>
+            }
+          </p>
+          @if (unknown()) {
+            <p class="mt-3 rounded-lg border border-line bg-well px-3 py-2 text-[13px] text-ink-2">
+              {{ unknown() }} {{ unknown() === 1 ? 'campeão nunca aparece' : 'campeões nunca aparecem' }} nessa posição no dataset: peso zero.
+            </p>
+          }
+
+          <h3 class="mt-7 text-[15px] font-medium">O que pesou: coeficiente × valor</h3>
+          <p class="mt-1 text-[13px] text-ink-2">Barras azuis empurram para o Time 1, vermelhas para o Time 2. Cada campeão escolhido vale 1 na sua coluna; a duração entra em minutos.</p>
+          <div class="mono mt-4 grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_48px] gap-2 text-[10.5px] text-dim" aria-hidden="true"><span></span><span class="flex justify-between"><span>← Time 2</span><span>Time 1 →</span></span><span></span></div>
+          <ul class="mt-1.5 space-y-0.5" aria-label="Contribuição de cada variável para o logit">
+            @for (t of contrib(); track t.slot) {
+              <li class="tip grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)_48px] items-center gap-2 rounded-md py-0.5 text-[12.5px]"
+                  [attr.title]="t.label + ': ' + sgn(t.value, 3) + (t.slot >= 0 ? ' · ' + t.games + ' partidas nessa posição' : '')">
+                <span class="truncate text-right" [class.text-dim]="!t.games && t.slot >= 0">{{ t.label }}@if (t.team) {<span class="text-dim"> · T{{ t.team }}</span>}</span>
+                <span class="grid h-5 grid-cols-2">
+                  <span class="relative border-r border-line-2">@if (t.value < 0) {<span class="bar bar-neg bar-anim absolute inset-y-[3px] right-0 w-full bg-t2" [style.transform]="'scaleX(' + t.scale + ')'"></span>}</span>
+                  <span class="relative">@if (t.value > 0) {<span class="bar bar-anim absolute inset-y-[3px] left-0 w-full bg-t1" [style.transform]="'scaleX(' + t.scale + ')'"></span>}</span>
+                </span>
+                <span class="num mono text-right text-[11.5px]">{{ sgn(t.value) }}</span>
+              </li>
+            }
+          </ul>
+          <p class="num mono mt-4 rounded-lg border border-line bg-well px-3 py-2.5 text-[12px] leading-relaxed text-ink-2">
+            z = {{ sgn(m.intercept) }} (intercepto) {{ z() - m.intercept >= 0 ? '+' : '−' }} {{ dec(Math.abs(z() - m.intercept)) }} (soma) = {{ sgn(z()) }}<br>
+            p = 1 / (1 + e<sup>−z</sup>) = {{ pct(p()) }}
+          </p>
+          @if (top(); as t) {
+            <p class="mt-4 text-[13px] leading-relaxed text-ink-2">
+              Maior peso agora: <strong class="text-ink">{{ t.label }}</strong>@if (t.team) { do Time {{ t.team }}}
+              ({{ sgn(t.value) }} no logit, a favor do Time {{ t.value > 0 ? 1 : 2 }}).
+              @if (t.slot >= 0) { Esse campeão aparece em {{ t.games }} {{ t.games === 1 ? 'partida' : 'partidas' }} nessa posição. }
+            </p>
+          }
+          <a href="#modelo" class="mt-4 inline-block text-[13px] text-accent underline underline-offset-2">Ver esta composição no plano de decisão</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DADOS ============ -->
+  <section id="dados" class="wrap scroll-mt-28 py-16" aria-labelledby="dados-title">
+    <p class="eyebrow">Dados · downloads</p>
+    <h2 id="dados-title" class="h2 mt-3 text-[32px] sm:text-[40px]">Leve os dados e o modelo</h2>
+    <p class="mt-3 max-w-3xl text-ink-2">
+      Dados reais, do arquivo original. O CSV completo cabe aqui, então vai inteiro. O JSON do modelo é exatamente o que
+      o simulador carrega; dá para reproduzir qualquer previsão com uma soma e uma sigmoide.
+    </p>
+    <ul class="mt-8 grid gap-4 md:grid-cols-3">
+      @for (d of e.downloads; track d.file) {
+        <li class="card flex flex-col p-5">
+          <p class="mono text-[12px] text-accent">{{ d.file }}</p>
+          <h3 class="mt-2 text-[16px] font-medium">{{ d.label }}</h3>
+          <p class="mt-2 flex-1 text-[14px] leading-relaxed text-ink-2">{{ d.description }}</p>
+          <div class="mt-4 flex items-center justify-between gap-3">
+            <span class="num mono text-[12px] text-dim">{{ kb(d.bytes) }}</span>
+            <a [href]="'data/' + d.file" [attr.download]="d.file" class="btn btn-primary !min-h-10">Baixar</a>
+          </div>
+        </li>
+      }
+    </ul>
+
+    <div class="card mt-8 overflow-x-auto p-5 sm:p-6">
+      <h3 class="text-[15px] font-medium">Dicionário de dados</h3>
+      <table class="mt-4 w-full min-w-[640px] text-left text-[13px]">
+        <thead class="text-[12px] text-ink-2"><tr class="border-b border-line"><th class="py-2 font-normal">Coluna</th><th class="font-normal">Tipo</th><th class="font-normal">Descrição</th></tr></thead>
+        <tbody>
+          <tr class="border-b border-line/60"><td class="mono py-2">result</td><td>texto</td><td class="text-ink-2">Victory ou Defeat. O código original trata como o resultado do Time 1.</td></tr>
+          <tr class="border-b border-line/60"><td class="mono py-2">server</td><td>texto</td><td class="text-ink-2">Rótulo de servidor no arquivo (www, euw, na, eune).</td></tr>
+          <tr class="border-b border-line/60"><td class="mono py-2">team_1__001 a team_1__005</td><td>texto</td><td class="text-ink-2">Campeões do Time 1, uma coluna por rota inferida (Topo, Selva, Meio, Atirador, Suporte).</td></tr>
+          <tr class="border-b border-line/60"><td class="mono py-2">team_2__001 a team_2__005</td><td>texto</td><td class="text-ink-2">Campeões do Time 2, mesma ordem.</td></tr>
+          <tr class="border-b border-line/60"><td class="mono py-2">timestamp</td><td>data e hora</td><td class="text-ink-2">Momento do registro da partida (fuso não documentado).</td></tr>
+          <tr><td class="mono py-2">game_length</td><td>texto</td><td class="text-ink-2">Duração no formato "Xm Ys"; o modelo converte para minutos.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-line bg-well/80">
+  <div class="wrap grid gap-8 py-12 md:grid-cols-[1.4fr_1fr]">
+    <div>
+      <span class="inline-flex items-center gap-2.5">
+        <img src="favicon.svg" width="24" height="24" alt="">
+        <span class="text-[16px] font-semibold tracking-[-0.04em]">Predict<span class="font-light text-ink-2">Win</span></span>
+      </span>
+      <p class="mt-3 max-w-md text-[13px] leading-relaxed text-ink-2">
+        Regressão logística sobre partidas reais de League of Legends, recriada como app de dados interativo. Projeto de
+        portfólio, sem fins comerciais.
+      </p>
+    </div>
+    <ul class="space-y-2.5 text-[14px] text-ink-2">
+      <li><a [href]="links.portfolio" class="hover:text-ink">Desenvolvido por {{ links.author }}</a></li>
+      <li><a [href]="links.project" class="hover:text-ink">PredictWin no portfólio</a></li>
+      <li><a [href]="links.repo" class="hover:text-ink">Código no GitHub</a></li>
+      <li><a [href]="links.csv" class="hover:text-ink">Dataset original (s11.csv)</a></li>
+    </ul>
+  </div>
+  <div class="border-t border-line">
+    <p class="wrap py-5 text-[12px] leading-relaxed text-dim">
+      PredictWin não é endossado pela Riot Games e não reflete a visão ou opinião da Riot Games. League of Legends e Riot
+      Games são marcas da Riot Games, Inc. · © {{ year }} {{ links.author }}
+    </p>
+  </div>
+</footer>

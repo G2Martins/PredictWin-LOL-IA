@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://g2martins.github.io/PredictWin-LOL-IA/sitemap.xml
